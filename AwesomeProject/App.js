@@ -1,3 +1,3 @@
-import App from './components/CountChange';
+import App from './components/ImportDemo';
 
 export default App
