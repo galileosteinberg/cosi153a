@@ -1,28 +1,18 @@
 import React,{useState} from 'react';
 import {View, Button, Text} from 'react-native';
 
-const ChangeCount = ({coinName, coinValue}) => {
-    const [totalValue, setTotalValue] = useeState(0);
-    const [totalCount, setTotalCount] = useeState(0);
+const CoinCount = ({coinName, coinValue}) => {
     return (
-        <View style={{flex: 1, flexDirection: 'row'}} >
-            <Button
-                title={coinName}
-                onPress = {() => {
-                    setTotalValue(totalValue + parseInt(coinValue));
-                    setTotalCount(totalCount+1);
-                }}
-            />
-            <Text> value = {totalValue} </Text>
-            <Text> count = {totalCount} </Text>
-            <Text> {parseInt(coinValue)}</Text>     
+        <View style = {{flex: 1, flexDirection: 'row', }}>
+                <Button
+                    title = {coinName}
+                    onPress = {() => setChange(change+coinValue)}
+                    />
         </View>
-        )
+    )
 }
-
 const App = () => {
     const [change,setChange] = useState(0)
-    const [coins,setCoins] = useState(0)
 
     return (
       <View>
@@ -30,32 +20,29 @@ const App = () => {
                 U.S. Change Counter
             </Text>
             <Text style = {{fontSize: 20}}>
-                Total change: {change}
-            </Text>
-            <Text style = {{fontSize: 20}}>
-                Coins: {coins}
+                {change}
             </Text>
             <View style={{flex: 1, flexDirection: 'row'}} >
-                {/* <Button
+                <CoinCoint coinName = "Penny" coinValue = {1} />
+                <Button
                     title="Pennies"
-                    onPress = {() => {setChange(change+1); setCoins(coins+1)}}
-                    
-                /> */}
+                    onPress = {() => setChange(change+1)}
+                />
                 <Button
                     title="Nickels"
-                    onPress = {() => {setChange(change+5); setCoins(coins+1)}}
+                    onPress = {() => setChange(change+5)}
                 />
                 <Button
                     title="Dimes"
-                    onPress = {() => {setChange(change+10); setCoins(coins+1)}}
+                    onPress = {() => setChange(change+10)}
                 />
                 <Button
                     title="Quarters"
-                    onPress = {() => {setChange(change+25); setCoins(coins+1)}}
+                    onPress = {() => setChange(change+25)}
                 />
                 <Button
                     title="Half Dollars"
-                    onPress = {() => {setChange(change+50); setCoins(coins+1)}}
+                    onPress = {() => setChange(change+50)}
                 />
             </View>
       </View>

@@ -3,13 +3,12 @@ import {Button,Text,View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CountChange from './CountChange';
-import KeyPad from './KeyPad';
 
 const Stack = createNativeStackNavigator();
 
 const HomeScreen = ({navigation}) => {
     return (
-     <View style= {{flexDirection: "row", justifyContent: 'space-evenly'}}>
+     <View>
             <Button
                 title="Go to Tim's profile"
                 onPress={() =>
@@ -20,12 +19,6 @@ const HomeScreen = ({navigation}) => {
                 title="Count Change"
                 onPress={() =>
                 navigation.navigate('CountChange') 
-                }
-            />
-            <Button
-                title= "KeyPad"
-                onPress = {()=>
-                navigation.navigate('KeyPad')
                 }
             />
       </View>
@@ -46,7 +39,6 @@ const MyStack = () => {
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="CountChange" component={CountChange} />
-        <Stack.Screen name="KeyPad" component ={KeyPad} />
       </Stack.Navigator>
     </NavigationContainer>
   );
