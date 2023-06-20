@@ -3,6 +3,7 @@ import {Button,Text,View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CountChange from './CountChange';
+import UsernameContext from './UsernameContext';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,8 +29,11 @@ const HomeScreen = ({navigation}) => {
     return <Text>This is {route.params.name}'s profile</Text>;
   };
 
+  // use value={{apikey:'7d8s97f89dsfsd',username:'tjhickey'}}
 const MyStack = () => {
   return (
+   <UsernameContext.Provider value="tjhickey">
+      
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -41,6 +45,7 @@ const MyStack = () => {
         <Stack.Screen name="CountChange" component={CountChange} />
       </Stack.Navigator>
     </NavigationContainer>
+   </UsernameContext.Provider>
   );
 };
 

@@ -2,6 +2,8 @@ const axios = require('axios')
 
 // returns a list of matches for an address
 // if there is a match the latlon is in the coordinates field
+// URL is
+// https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=ADDRESS&benchmark=2020&format=json
 const get_latlon = async (address) => {
     address = encodeURI(address);
     let url="https://geocoding.geo.census.gov/geocoder"+
@@ -9,8 +11,10 @@ const get_latlon = async (address) => {
               "?address="+address+
               "&benchmark=2020"+
               "&format=json"
-    let response = await axios.get(url)
-    return response.data.result.addressMatches
+    console.log('url=',url)
+    let response = await fetch(url)
+    let json = await response.json()
+    return json.result.addressMatches
 }
 
 // returns a forecast for any US location
@@ -33,4 +37,4 @@ const get_weather = async (address) => {
   }
 }
 
-export {get_latlon, get_forecastURL, get_forecast, get_weather}
+export {get_latlon, get_forecastURL,  get_weather}

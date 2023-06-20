@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, FlatList, View, StyleSheet} from 'react-native';
+import { Text, FlatList, View } from 'react-native';
 
 const Movie = ({ title, releaseYear }) => (
-    <View style={styles.movieContainer}>
-        <Text style = {styles.movieTitle}> {title}</Text>
-        <Text style = {styles.movieYear}> {releaseYear}</Text>
+    <View style={{backgroundColor:'lightblue'}}>
+        <Text>{title}, {releaseYear}</Text>
     </View>
 );
 
@@ -27,9 +26,8 @@ const APIdemo = () => {
     useEffect(() => {getMovies()}, [])
 
     return(
-        <View style = {styles.container}>
-            <Text style = {styles.title}>
-                API Demo</Text>
+        <View>
+            <Text>API Demo</Text>
             
             <FlatList
                 data={data.slice(0,20)}
@@ -45,30 +43,5 @@ const APIdemo = () => {
         </View>
     );
 }
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 16,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16,
-    },
-    movieContainer: {
-        backgroundColor: 'green',
-        marginBottom: 8,
-        padding: 8,
-        borderRadius: 10,
-    },
-    movieTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    movieYear: {
-        fontSize: 14,
-        fontStyle: 'italic',
-    },
-  });
 
 export default APIdemo;

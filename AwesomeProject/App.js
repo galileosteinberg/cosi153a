@@ -1,3 +1,4 @@
-import App from './components/CountChange'
 
-export default App
+import App from './components/LatLonDemo';
+
+export default App;
