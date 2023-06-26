@@ -4,16 +4,17 @@ This is a demo of the OpenAI API in React Native
 
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, Text, TextInput, Button, FlatList, View } from 'react-native';
-import axios from 'axios';
-import open_api_key from './open_api_key';
+import axios from 'axios';  // make sure you npm install axios    
+import open_api_key from './open_api_key';  // this is in .gitignore don't push to github
 
-// /*
-// open_api_key.js has the form
-// export default "your key here";
-// and .gitignore has the line 
-//    open_api_key.js
-// as you don't want to put your API key into github!
-// */
+
+/*
+open_api_key.js has the form
+export default "your key here";
+and .gitignore has the line 
+   open_api_key.js
+as you don't want to put your API key into github!
+*/
 
 
 
@@ -40,7 +41,7 @@ const APIdemo = () => {
                 await axios.post(url,msg_data,config)
 
 
-          const result = await response.data;
+          const result = await response.data;  // don't need await??
           setLoading(false);
           setData(result);
         } catch (error) {
@@ -55,16 +56,16 @@ const APIdemo = () => {
 
     const ChatReponse = ({role,content}) => (
         <View style={{backgroundColor:'lightblue',margin:10,padding:20,}}>
-            <Text>ChatGPT definition is:</Text>
+            <Text>ChatGPT Response to the prompt is:</Text>
             <Text style={{backgroundColor:'white'}}>{content}</Text>
         </View>
     );
 
-    const debugging = false;
+    const debugging = true;
     return(
         <SafeAreaView style={{flex:1, fontSize:24,margin:30}}>
             <Text>API Demo</Text>
-            <Text style={{marginTop:30}}>Enter word to get a funny definition: </Text>
+            <Text style={{marginTop:30}}>Prompt: </Text>
             <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1, padding:10, margin:10 }}
                 onChangeText={text => setPromptText(text)}
@@ -72,8 +73,8 @@ const APIdemo = () => {
             />
 
             <Button
-                onPress={() => {setLoading(true); setData({choices:[]}); setPrompt('Give a funny/sardonic definition for ' + promptText);}}
-                title={loading?'awaiting response':"Get GPT Definition"}
+                onPress={() => {setLoading(true); setData({choices:[]}); setPrompt(promptText);}}
+                title={loading?'awaiting response':"Ask GPT"}
                 color="#841584"
                 accessibilityLabel="Send"
             />
