@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, Vibration } from 'react-native';
 import timer from 'react-native-timer';
 
 export default function HeartRatePage({navigation}) {
@@ -19,6 +19,7 @@ export default function HeartRatePage({navigation}) {
         timer.clearInterval('countdown');
         calculateBeatsPerMinute();
         Alert.alert("Timer finished!", "You can now calculate your beats per minute.");
+        Vibration.vibrate(500);
       }, 10000); // 10 seconds timer
     }
 
@@ -73,6 +74,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 16,
     padding: 8,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 32,
   },
   countdown: {
     marginTop: 16,
