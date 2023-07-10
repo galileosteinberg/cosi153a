@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
 
 
 
@@ -8,11 +8,10 @@ import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 const App = () => {
   
   const d = (x,y,z) => Math.sqrt(x*x+y*y+z*z)
+  const [x,setX] = useState("")
+  const [y,setY] = useState("")
+  const [z,setZ] = useState("")
   const [result,setResult] = useState("")
-  
-  const x = 1
-  const y = 2
-  const z = 2
   
   const updateResult = () => {
     setResult(d(x,y,z))
@@ -25,10 +24,14 @@ const App = () => {
       <Text style = {styles.body}> 
         Write the code for this app which calculates {'\n'} 
         d = Math.sqrt(x*x+y*y+z*z) {'\n'}
-        {x} {'\n'}
-        {y} {'\n'}
-        {z} {'\n'}
-      </Text>
+        </Text>
+        <TextInput style = {styles.body} placeholder="Input x" onChangeText={text => setX(text)} />
+        {'\n'}
+        <TextInput style = {styles.body} placeholder="Input y" onChangeText={text => setY(text)} />
+        {'\n'}
+        <TextInput style = {styles.body} placeholder="Input z" onChangeText={text => setZ(text)} />
+        {'\n'}
+      
       <TouchableOpacity style={styles.button} onPress={() => updateResult()}><Text style={styles.buttonText} >CALCULATE DISTANCE</Text> </TouchableOpacity>
       <Text style = {styles.body}> 
         distance to ({x},{y},{z}) is d = {result}

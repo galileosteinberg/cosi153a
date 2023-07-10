@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import call from 'react-native-phone-call';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function EmergencyPage({navigation}) {
+  const [emergencyContact, setEmergencyContact] = useState('');
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      const storedEmergencyContact = await AsyncStorage.getItem('emergencyContact');
+      if (storedEmergencyContact !== null) setEmergencyContact(storedEmergencyContact);
+    };
+    fetchContact();
+  }, 
+  []);
+
+  const call_911 = () => {
+    const args = {
+      number: '1234567890',
+      prompt: false,
+    };
+    call(args).catch(console.error);
+  };
   const makeEmergencyCall = () => {
     const args = {
-      number: '8572757307',
+      number: emergencyContact,
       prompt: false,
     };
     call(args).catch(console.error);
@@ -14,7 +33,8 @@ export default function EmergencyPage({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Are you in need of immediate assistance?</Text>
-      <Button title="YES" onPress={makeEmergencyCall} />
+      <Button title="Call 911" onPress={call_911} />
+      <Button title="Call Emergency Contact" onPress={makeEmergencyCall} />
     </View>
   );
 }

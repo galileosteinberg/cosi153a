@@ -10,6 +10,7 @@ export default function PersonalData({navigation}) {
   const [eyeColor, setEyeColor] = useState('');
   const [hairColor, setHairColor] = useState('');
   const [medicalConditions, setMedicalConditions] = useState('');
+  const [emergencyContact, setEmergencyContact] = useState('');
   const [dataVisible, setDataVisible] = useState(true);
 
   // Fetch the stored data from async storage when the component renders
@@ -22,6 +23,7 @@ export default function PersonalData({navigation}) {
       const storedEyeColor = await AsyncStorage.getItem('eyeColor');
       const storedHairColor = await AsyncStorage.getItem('hairColor');
       const storedMedicalConditions = await AsyncStorage.getItem('medicalConditions');
+      const storedEmergencyContact = await AsyncStorage.getItem('emergencyContact');
 
       if (storedName !== null) setName(storedName);
       if (storedGender !== null) setGender(storedGender);
@@ -29,7 +31,9 @@ export default function PersonalData({navigation}) {
       if (storedWeight !== null) setWeight(storedWeight);
       if (storedEyeColor !== null) setEyeColor(storedEyeColor);
       if (storedHairColor !== null) setHairColor(storedHairColor);
+      if (storedHairColor !== null) setHairColor(storedHairColor);
       if (storedMedicalConditions !== null) setMedicalConditions(storedMedicalConditions);
+      if (storedEmergencyContact !== null) setEmergencyContact(storedEmergencyContact);
     };
 
     fetchData();
@@ -45,6 +49,7 @@ export default function PersonalData({navigation}) {
       await AsyncStorage.setItem('eyeColor', eyeColor);
       await AsyncStorage.setItem('hairColor', hairColor);
       await AsyncStorage.setItem('medicalConditions', medicalConditions);
+      await AsyncStorage.setItem('emergencyContact', emergencyContact)
       setDataVisible(false);
     } catch (error) {
       console.log(error);
@@ -60,6 +65,7 @@ export default function PersonalData({navigation}) {
       await AsyncStorage.removeItem('eyeColor');
       await AsyncStorage.removeItem('hairColor');
       await AsyncStorage.removeItem('medicalConditions');
+      await AsyncStorage.removeItem('emergencyContact');
       
       // Update the states to clear the input fields
       setName('');
@@ -69,6 +75,7 @@ export default function PersonalData({navigation}) {
       setEyeColor('');
       setHairColor('');
       setMedicalConditions('');
+      setEmergencyContact('');
     } catch (error) {
       console.log(error);
     }
@@ -124,6 +131,12 @@ export default function PersonalData({navigation}) {
             onChangeText={text => setMedicalConditions(text)}
             value={medicalConditions}
           />
+          <TextInput 
+            style={styles.input}
+            placeholder="Enter emergency contact number"
+            onChangeText={text => setEmergencyContact(text)}
+            value={emergencyContact}
+          />
           <Button title="Save Data" onPress={saveData} />
           <Button title="Clear Data" onPress={clearData} />
         </>
@@ -137,6 +150,7 @@ export default function PersonalData({navigation}) {
           <Text>Eye Color: {eyeColor}</Text>
           <Text>Hair Color: {hairColor}</Text>
           <Text>Medical Conditions: {medicalConditions}</Text>
+          <Text>Emergency Contact: {emergencyContact}</Text>
           <Button title="Update Data" onPress={updateData} />
         </>
       }
